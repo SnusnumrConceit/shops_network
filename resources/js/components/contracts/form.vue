@@ -165,7 +165,20 @@
                 this.providers = response.data.providers;
                 this.users = response.data.users;
                 this.shops = response.data.shops;
+            },
+
+            async loadProviderShops(id) {
+                const response = await axios.get('/providers/products/' + id);
+                if (! response.status) throw response;
                 this.products = response.data.products;
+            }
+        },
+
+        watch: {
+            'contract.provider_id': {
+                handler: function(newVal, oldVal) {
+                    this.loadProviderShops(newVal);
+                }
             }
         },
 

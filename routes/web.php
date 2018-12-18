@@ -55,6 +55,8 @@ Route::group(['prefix' => 'providers'], function () {
         ->where('id', '[0-9]+');
     Route::get('/form_info', 'ProviderController@form_info');
     Route::get('/search', 'ProviderController@search');
+    Route::get('/products/{id}', 'ProviderController@getProducts')
+        ->where('id', '[0-9]+');
 });
 
 Route::group(['prefix' => 'shops'], function () {

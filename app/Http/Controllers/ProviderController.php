@@ -69,6 +69,14 @@ class ProviderController extends Controller
         ], 200);
     }
 
+    public function getProducts(int $id)
+    {
+        $products = Provider::with('products')->findOrFail($id);
+        return response()->json([
+            'products' => $products->products
+        ], 200);
+    }
+
     /**
      * Show the form for editing the specified resource.
      *

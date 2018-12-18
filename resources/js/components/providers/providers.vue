@@ -77,8 +77,10 @@
             </div>
             <div class="modal-body">
                 <ul class="products">
-                    <li v-for="(product, key, index) in modal_products">
-                        <router-link :to="'/product/edit/' + product[index].id">{{ product[index].name}}</router-link>{{ product[index].cost }} &#8381;</li>
+                    <li v-for="(product, key, index) in modal_products.products">
+                        <router-link :to="'/product/edit/' + product.id">{{ product.name}}</router-link>
+                        {{ product.cost }} &#8381;
+                    </li>
                 </ul>
             </div>
         </modal>

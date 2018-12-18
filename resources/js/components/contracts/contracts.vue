@@ -49,6 +49,11 @@
                         <td>{{ contract.created_at }}</td>
                         <td>{{ contract.deadline }}</td>
                         <td>
+                            <button class="btn btn-outline-success" v-if="contract.products.length" @click="showModal({ products: contract.products})">
+                                Продукты
+                            </button>
+                        </td>
+                        <td>
                             <a @click="$router.push({ path: '/contract/edit/' + contract.id})">
                                 <i class="text-success fa fa-gear">
                                 </i>
@@ -75,6 +80,19 @@
                     :click-handler="switchPage">
             </paginate>
         </div>
+        <modal name="productsModal">
+            <div class="modal-title">
+                <h3>Продукты</h3>
+            </div>
+            <div class="modal-body">
+                <ul class="products">
+                    <li v-for="(product, key, index) in modal_products.products">
+                        <router-link :to="'/product/edit/' + product.id">{{ product.name}}</router-link>
+                        {{ product.cost }} &#8381;
+                    </li>
+                </ul>
+            </div>
+        </modal>
     </div>
 </template>
 
@@ -87,6 +105,8 @@
                     last_page: 1,
                     page: 1
                 },
+
+                modal_products: [],
 
                 search: {
                     filter: '',
@@ -116,6 +136,15 @@
                   is_search: false,
               }
               this.switchPage(1);
+            },
+
+            showModal(products) {
+                this.modal_products = {...products};
+                this.$modal.show('productsModal');
+            },
+
+            hideModal() {
+                this.$modal.hide('productsModal');
             },
 
             async remove(id) {
