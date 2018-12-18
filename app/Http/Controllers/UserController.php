@@ -127,7 +127,7 @@ class UserController extends Controller
 //            $user->update($request->all());
             DB::select('call edit_user(?, ?, ?, ?, ?, ?, ?)', [
                 $request->input('email'),
-                bcrypt($request->input('email')),
+                Hash::make($request->input('password')),
                 $request->input('first_name'),
                 $request->input('last_name'),
                 $request->input('phone'),
