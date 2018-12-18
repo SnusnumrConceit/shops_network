@@ -3,7 +3,7 @@
         <div class="col-md-12">
             <div class="form-inline">
                 <div class="links">
-                    <button class="btn btn-outline-primary" @click="$router.push({ path: '/contract/add' })">
+                    <button class="btn btn-outline-primary" @click="$router.push({ path: '/product/add' })">
                         Добавить
                     </button>
                 </div>
