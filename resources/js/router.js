@@ -51,7 +51,7 @@ export const routes = [
     {
         path: '/user/edit/:id',
         component: UserForm,
-        beforeEnter: ifNotAuthenticated
+        beforeEnter: ifAuthenticated
     },
     {
         path: '/shops',

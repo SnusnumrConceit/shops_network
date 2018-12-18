@@ -2,7 +2,7 @@
     <div class="row">
         <div class="col-md-12">
             <div class="links">
-                <button class="btn btn-outline-primary" @click="$router.push({ path: 'user/add' })">
+                <button class="btn btn-outline-primary" @click="$router.push({ path: '/user/add' })">
                     Добавить
                 </button>
             </div>
@@ -27,7 +27,7 @@
                     <td>{{ user.phone }}</td>
                     <td>{{ user.role.name }}</td>
                     <td>
-                        <a @click="$router.push({ path: 'user/edit/' + user.id })">
+                        <a @click="$router.push({ path: '/user/edit/' + user.id })">
                             <i class="text-success fa fa-gear"></i>
                         </a>
                         <a @click="remove(user.id)">
