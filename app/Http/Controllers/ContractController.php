@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Model\Contract;
+use App\Model\Product;
 use App\User;
 use App\Model\Provider;
 use App\Model\Shop;
@@ -54,6 +55,23 @@ class ContractController extends Controller
                 $ca,
                 $deadline
             ]);
+            $contract = Contract::where(function ($q) use ($request, $ca, $deadline) {
+                $q->where('provider_id', $request->input('provider_id'));
+                $q->where('author_id', $request->input('author_id'));
+                $q->where('shop_id', $request->input('shop_id'));
+                $q->where('created_at', $ca);
+                $q->where('deadline', $deadline);
+            })->first();
+            if ($request->input('products') !== null) {
+                $products = $request->input('products');
+                foreach ($products as $product) {
+                    if (! isset($product)) continue;
+                    DB::select('call refresh_contracts_products(?,?)', [
+                        $product,
+                        $contract->id
+                    ]);
+                }
+            }
             return response()->json([
                 'status' => 'success'
             ], 200);
@@ -90,7 +108,7 @@ class ContractController extends Controller
      */
     public function edit(int $id)
     {
-        $contract = Contract::findOrFail($id);
+        $contract = Contract::with('products')->findOrFail($id);
         return response()->json([
             'contract' => $contract,
             'status' => 'success'
@@ -102,11 +120,13 @@ class ContractController extends Controller
         $providers = Provider::all();
         $users = User::all();
         $shops = Shop::all();
+        $products = Product::all();
         return response()->json([
             'providers' => $providers,
             'users' => $users,
             'shops' => $shops,
-            'status' => 'success'
+            'products' => $products,
+            'status' => 'success',
         ], 200);
     }
 
@@ -148,6 +168,17 @@ class ContractController extends Controller
             $id
         ]);
 //        $edit_contract->update(($request->all()));
+        if ($request->input('products') !== null) {
+            DB::select('call clear_contracts_products(?)', [ $id ]);
+            $products = $request->input('products');
+            foreach ($products as $product) {
+                if (! isset($product)) continue;
+                DB::select('call refresh_contracts_products(?,?)', [
+                    $product,
+                    $id
+                ]);
+            }
+        }
         return response()->json([
             'status' => 'success'
         ], 200);

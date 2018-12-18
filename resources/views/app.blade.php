@@ -19,12 +19,16 @@
             color: #636b6f;
             font-family: 'Nunito', sans-serif;
             font-weight: 200;
-            height: 100vh;
+            height: 100%;
+            margin: 0;
+        }
+
+        .row{
             margin: 0;
         }
 
         .full-height {
-            height: 100vh;
+            height: 100%;
         }
 
         .flex-center {
@@ -86,38 +90,38 @@
 </head>
 <body>
 <div id="app">
-    {{--<div class="flex-center position-ref full-height">--}}
-        {{--@if (Route::has('login'))--}}
-        {{--<div class="top-right links">--}}
-            {{--@auth--}}
-            {{--<a href="{{ url('/home') }}">Home</a>--}}
-            {{--@else--}}
-            {{--<a href="{{ route('login') }}">Login</a>--}}
+{{--<div class="flex-center position-ref full-height">--}}
+{{--@if (Route::has('login'))--}}
+{{--<div class="top-right links">--}}
+{{--@auth--}}
+{{--<a href="{{ url('/home') }}">Home</a>--}}
+{{--@else--}}
+{{--<a href="{{ route('login') }}">Login</a>--}}
 
-            {{--@if (Route::has('register'))--}}
-            {{--<a href="{{ route('register') }}">Register</a>--}}
-            {{--@endif--}}
-            {{--@endauth--}}
-        {{--</div>--}}
-        {{--@endif--}}
-    {{--</div>--}}
+{{--@if (Route::has('register'))--}}
+{{--<a href="{{ route('register') }}">Register</a>--}}
+{{--@endif--}}
+{{--@endauth--}}
+{{--</div>--}}
+{{--@endif--}}
+{{--</div>--}}
 
-    <!--<div class="content full-height">
+<!--<div class="content full-height">
             <div>Авторизован - {{ Auth::user() }}</div>
 
         <div class="row">
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <!-- Right Side Of Navbar -->
-                <!--<ul class="navbar-nav ml-auto">
-                <!-- Authentication Links -->
-            <!--@guest
-                <li class="nav-item">
-                    <router-link to="/login" class="nav-link">Войти</router-link>
-                        </li>
-            @else
-                <li class="nav-item dropdown">
-                    <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                        {{ Auth::user()->name }} <span class="caret"></span>
+    <!--<ul class="navbar-nav ml-auto">
+    <!-- Authentication Links -->
+<!--@guest
+    <li class="nav-item">
+        <router-link to="/login" class="nav-link">Войти</router-link>
+            </li>
+@else
+    <li class="nav-item dropdown">
+        <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+{{ Auth::user()->name }} <span class="caret"></span>
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
@@ -125,36 +129,36 @@
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}
-                        </a>
+            </a>
 
-                        <form id="logout-form" action="/logout" method="POST" style="display: none;">
-                                        @csrf
-                        </form>
-                    </div>
-                </li>
-                @endguest
-                    </ul>
-            </div>
-            @if (Auth::user())
-            <div class="col-md-3 links">
-                <div class="list-group">
-                    <router-link to="/contracts" class="list-group-item list-group-item-action">Заказы</router-link>
-                    <router-link to="/providers" class="list-group-item list-group-item-action">Поставщики</router-link>
-                    <router-link to="/shops" class="list-group-item list-group-item-action">Магазины</router-link>
-                    <router-link to="/products" class="list-group-item list-group-item-action">Продукция</router-link>
-                    <router-link to="/users" class="list-group-item list-group-item-action">Пользователи</router-link>
-                </div>
-            </div>
-            <div class="col-md-9">
-                <div class="main">
-                    <router-view></router-view>
-                </div>
-            </div>
-            @else
-            <div class="col-md-12">
-                <router-view></router-view>
-            </div>
-            @endif
+            <form id="logout-form" action="/logout" method="POST" style="display: none;">
+@csrf
+            </form>
+        </div>
+    </li>
+@endguest
+        </ul>
+</div>
+@if (Auth::user())
+    <div class="col-md-3 links">
+        <div class="list-group">
+            <router-link to="/contracts" class="list-group-item list-group-item-action">Заказы</router-link>
+            <router-link to="/providers" class="list-group-item list-group-item-action">Поставщики</router-link>
+            <router-link to="/shops" class="list-group-item list-group-item-action">Магазины</router-link>
+            <router-link to="/products" class="list-group-item list-group-item-action">Продукция</router-link>
+            <router-link to="/users" class="list-group-item list-group-item-action">Пользователи</router-link>
+        </div>
+    </div>
+    <div class="col-md-9">
+        <div class="main">
+            <router-view></router-view>
+        </div>
+    </div>
+@else
+    <div class="col-md-12">
+        <router-view></router-view>
+    </div>
+@endif
         </div>
     </div>-->
     <app></app>

@@ -35,6 +35,20 @@
                                  :lang="'ru'"></date-picker>
                 </div>
                 <div class="form-group">
+                    <label for="">Продукты</label>
+                    <div class="form-group" v-if="contract.products.length"  v-for="(element, index) in contract.products" style="display: flex;">
+                        <select class="form-control col-md-10" v-model="contract.products[index]">
+                            <option :value="product.id" v-for="product in products">{{ product.name }}</option>
+                        </select>
+                        <label @click="removeProduct(index)" v-if="contract.products[index]" class="col-md-2" style="padding-top: 10px;">
+                            <i class="text-danger fa fa-ban"></i>
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <span v-if="contract.products.length < products.length" @click="contract.products.push('')" class="text-success" style="cursor: pointer">+</span>
+                    </div>
+                </div>
+                <div class="form-group">
                     <button class="btn btn-outline-success"
                             type="button"
                             v-if="$route.params.id"
@@ -65,10 +79,13 @@
         components: { DatePicker },
         data() {
             return {
-                contract: {},
+                contract: {
+                    products: []
+                },
                 providers: {},
                 users: {},
-                shops: {}
+                shops: {},
+                products: {}
             }
         },
 
@@ -125,10 +142,22 @@
                     }
                 }
             },
+
+            removeProduct(id) {
+                this.contract.products.splice(id, 1);
+            },
+
             async loadData() {
                 const response = await axios.get('/contracts/edit/' + this.$route.params.id);
                 if (! response.status) throw response;
                 this.contract = response.data.contract;
+                if (this.contract.products === null) {
+                    this.contract.products = [];
+                    return true;
+                }
+                this.contract.products.forEach((product, index) => {
+                    this.contract.products[index] = this.contract.products[index].id;
+                });
             },
             async getExtendedData() {
                 const response = await axios.get('/contracts/form_info');
@@ -136,6 +165,7 @@
                 this.providers = response.data.providers;
                 this.users = response.data.users;
                 this.shops = response.data.shops;
+                this.products = response.data.products;
             }
         },
 
